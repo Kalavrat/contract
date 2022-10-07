@@ -1,0 +1,17 @@
+h1 {
+  max-width: min-content;
+  margin: 0px;
+}
+.form {
+  border: 1px black solid;
+  margin-top: 10px;
+  padding: 5px;
+  max-width: min-content;
+}
+.login_text,
+.pas_text {
+  font-size: medium;
+}
+.zareg_btn {
+  margin-top: 10px;
+}
