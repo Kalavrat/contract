@@ -8,15 +8,38 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="body">
-    <button class="enter_btn">Войти</button>
-    <button class="reg_btn">Регистрация</button>
-    <div class="form">
-      <h1 class="reg_text">Регистрация</h1>
-      <h1 class="login_text">Логин</h1>
-      <input class="login_inp" />
-      <h1 class="pas_text">Пароль</h1>
-      <input class="pas_inp" />
-      <button class="zareg_btn">Зарегистрироваться</button>
+    <div class="vhod_reg">
+      <button class="enter_btn">Вход</button>
+      <button class="reg_btn">Регистрация</button>
+      <div class="form">
+        <h1 class="reg_text">Регистрация</h1>
+        <h1 class="vhod_text">Вход</h1>
+        <h1 class="login_text">Логин</h1>
+        <!-- <input class="login_inp" /> -->
+        <h1 class="pas_text">Пароль</h1>
+        <input class="pas_inp" />
+        <h1 class="error_pas">Неверный пароль</h1>
+        <h1 class="error_acc">Вы не зарегистрированы</h1>
+        <button class="zareg_btn">Зарегистрироваться</button>
+        <button class="vhod_btn">Войти</button>
+      </div>
+    </div>
+    <div class="main">
+      <div class="acc">
+        <div class="address_div">
+          <h2 class="address">Адрес:</h2>
+          <h2 class="address_cont">sdf</h2>
+        </div>
+        <div class="balance_div">
+          <h2 class="balance">Баланс:</h2>
+          <h2 class="balance_cont">dfd</h2>
+        </div>
+        <div class="role_div">
+          <h2 class="role">Роль:</h2>
+          <h2 class="role_cont">dfdf</h2>
+        </div>
+      </div>
+      <button class="perevod_btn">Перевод средств</button>
     </div>
     <script src="web3_min.js"></script>
     <script src="main.js"></script>
