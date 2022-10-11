@@ -20,7 +20,9 @@ h1 {
   font-size: medium;
 }
 .error_pas,
-.error_acc {
+.error_acc,
+.error_already,
+.error_vved {
   font-size: small;
   min-width: max-content;
   color: rgb(226, 0, 0);
@@ -34,13 +36,16 @@ h1 {
   margin-top: 10px;
 }
 .main {
-  /* display: none; */
-  width: 500px;
+  display: none;
+  width: 510px;
   margin-top: 30px;
   margin-left: 20px;
 }
+.exit {
+  margin-bottom: 10px;
+}
 .acc {
-  padding-left: 5px;
+  padding-left: 10px;
   border: 1px black solid;
   margin-bottom: 10px;
 }
@@ -56,4 +61,42 @@ h2 {
   margin-bottom: 5px;
 }
 .perevod_btn {
+  /* display: none; */
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.div_send {
+  /* display: none; */
+}
+.div_per {
+  margin-top: 10px;
+  margin-left: 20px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  border: 1px black solid;
+  width: 500px;
+}
+.head_per_text {
+  font-size: 2em;
+  min-width: max-content;
+  margin-bottom: 10px;
+}
+.rec_text,
+.summa_text,
+.cat_text,
+.slovo_text,
+.safe_text {
+  font-size: medium;
+  min-width: max-content;
+  margin-bottom: 5px;
+}
+.div_per input {
+  margin-bottom: 5px;
+}
+.div_per h2 {
+  font-size: small;
+  min-width: max-content;
+  color: rgb(226, 0, 0);
+  margin: 0;
+  display: none;
 }

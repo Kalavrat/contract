@@ -20,11 +20,14 @@
         <input class="pas_inp" />
         <h1 class="error_pas">Неверный пароль</h1>
         <h1 class="error_acc">Вы не зарегистрированы</h1>
+        <h1 class="error_already">Ваш адрес уже зарегистрирован</h1>
+        <h1 class="error_vved">Введите пароль</h1>
         <button class="zareg_btn">Зарегистрироваться</button>
         <button class="vhod_btn">Войти</button>
       </div>
     </div>
     <div class="main">
+      <button class="exit">Выйти</button>
       <div class="acc">
         <div class="address_div">
           <h2 class="address">Адрес:</h2>
@@ -39,7 +42,30 @@
           <h2 class="role_cont">dfdf</h2>
         </div>
       </div>
-      <button class="perevod_btn">Перевод средств</button>
+    </div>
+    <div class="div_send">
+      <div class="div_per">
+        <h1 class="head_per_text">Создание перевода</h1>
+        <h1 class="rec_text">Введите адрес получателя</h1>
+        <h2 class="rec_error">Обязательное поле</h2>
+        <input class="rec_inp" />
+        <h1 class="summa_text">Введите сумму</h1>
+        <h2 class="summa_error">Обязательное поле</h2>
+        <h2 class="malo_error">Недостаточно средств</h2>
+        <input class="summa_inp" />
+        <h1 class="cat_text">Введите категорию</h1>
+        <h2 class="cat_error">Обязательное поле</h2>
+        <input class="cat_inp" />
+        <h1 class="slovo_text">Введите кодовое слово</h1>
+        <h2 class="slovo_error">Обязательное поле</h2>
+        <input class="slovo_inp" />
+        <h1 class="safe_text">Выберите тип транзакции</h1>
+        <select class="type_tranz">
+          <option value="true">false</option>
+          <option value="false">true</option>
+        </select>
+      </div>
+      <button class="perevod_btn">Создать перевод</button>
     </div>
     <script src="web3_min.js"></script>
     <script src="main.js"></script>

@@ -1,4 +1,4 @@
-const contractAddress = "0x225F632Fc6a5E2026d07a014461923CE63c3cF7e";
+const contractAddress = "0xF775f817682112D98c1a9996834eF67C6F519205";
 const abi = [
   {
     inputs: [],
@@ -154,10 +154,26 @@ let zareg_btn = document.querySelector(".zareg_btn");
 let pas_inp = document.querySelector(".pas_inp");
 let error_pas = document.querySelector(".error_pas");
 let error_acc = document.querySelector(".error_acc");
+let error_already = document.querySelector(".error_already");
+let error_vved = document.querySelector(".error_vved");
 let main = document.querySelector(".main");
+let exit = document.querySelector(".exit");
 let address_cont = document.querySelector(".address_cont");
 let balance_cont = document.querySelector(".balance_cont");
 let role_cont = document.querySelector(".role_cont");
+let perevod_btn = document.querySelector(".perevod_btn");
+let div_per = document.querySelector(".div_per");
+let div_send = document.querySelector(".div_send");
+let rec_inp = document.querySelector(".rec_inp");
+let summa_inp = document.querySelector(".summa_inp");
+let cat_inp = document.querySelector(".cat_inp");
+let slovo_inp = document.querySelector(".slovo_inp");
+let rec_error = document.querySelector(".rec_error");
+let summa_error = document.querySelector(".summa_error");
+let malo_error = document.querySelector(".malo_error");
+let cat_error = document.querySelector(".cat_error");
+let slovo_error = document.querySelector(".slovo_error");
+let type_tranz = document.querySelector(".type_tranz");
 
 let web3, accounts, balance;
 let contractInstance;
@@ -170,6 +186,9 @@ async function network() {
     error_pas.style.display = "none";
     error_acc.style.display = "none";
     vhod(contractInstance);
+  });
+  zareg_btn.addEventListener("click", () => {
+    registr(contractInstance);
   });
 }
 network();
@@ -188,18 +207,33 @@ async function getBal(acc) {
 }
 
 enter.addEventListener("click", () => {
-  console.log("enter");
+  pas_inp.value = "";
+
+  error_already.style.display = "none";
+  error_vved.style.display = "none";
+
   reg_text.style.display = "none";
   zareg_btn.style.display = "none";
+
   vhod_text.style.display = "flex";
   vhod_btn.style.display = "grid";
 });
 reg_btn.addEventListener("click", () => {
-  console.log("reg");
+  pas_inp.value = "";
+
+  error_pas.style.display = "none";
+  error_acc.style.display = "none";
+
   vhod_text.style.display = "none";
   vhod_btn.style.display = "none";
+
   reg_text.style.display = "flex";
   zareg_btn.style.display = "grid";
+});
+exit.addEventListener("click", () => {
+  main.style.display = "none";
+  div_send.style.display = "none";
+  vhod_reg.style.display = "block";
 });
 
 function getList(accounts) {
@@ -226,11 +260,14 @@ async function vhod() {
     error_pas.style.display = "none";
     error_acc.style.display = "none";
   });
-  console.log(person);
-  if (person.password == pas_inp.value) {
+  if (
+    person.password ==
+    web3.utils.soliditySha3({ type: "string", value: pas_inp.value })
+  ) {
     vhod_reg.style.display = "none";
     console.log("Вход произведен");
     main.style.display = "block";
+    div_send.style.display = "block";
     address_cont.textContent = select.value;
     acc = select.value;
     balance = await web3.eth.getBalance(acc);
@@ -245,18 +282,105 @@ async function vhod() {
     person.password ==
     "0x0000000000000000000000000000000000000000000000000000000000000000"
   ) {
-    console.log("Вы не зарегистрированы");
+    pas_inp.value = "";
     error_acc.style.display = "flex";
   } else {
-    console.log("Неверныый пароль");
     error_pas.style.display = "flex";
   }
 }
 
 async function registr() {
-  let mas = await contractInstance.methods;
-  console.log(mas);
-  login = document.querySelector(".login_inp");
-  password = document.querySelector(".pas_inp");
+  error_already.style.display = "none";
+  error_vved.style.display = "none";
+  let select = document.querySelector(".select");
+  console.log(select.value);
+  let person = await contractInstance.methods
+    .return_users()
+    .call({ from: select.value });
+  pas_inp.addEventListener("input", () => {
+    error_already.style.display = "none";
+    error_vved.style.display = "none";
+  });
+  console.log(person);
+  if (
+    person.password ==
+    "0x0000000000000000000000000000000000000000000000000000000000000000"
+  ) {
+    if (pas_inp.value != "") {
+      let new_acc = await contractInstance.methods
+        .regestration(pas_inp.value)
+        .send({ from: select.value });
+      reg_text.style.display = "none";
+      zareg_btn.style.display = "none";
+
+      vhod_text.style.display = "flex";
+      vhod_btn.style.display = "grid";
+      pas_inp.value = "";
+
+      alert("Аккаунт зарегистрирован");
+    } else {
+      error_vved.style.display = "flex";
+    }
+  } else {
+    pas_inp.value = "";
+    error_already.style.display = "flex";
+  }
 }
-// registr();
+
+perevod_btn.addEventListener("click", () => {
+  create_per();
+});
+
+async function create_per() {
+  let error = 0;
+
+  rec_inp.addEventListener("input", () => {
+    rec_error.style.display = "none";
+  });
+  summa_inp.addEventListener("input", () => {
+    summa_error.style.display = "none";
+    malo_error.style.display = "none";
+  });
+  cat_inp.addEventListener("input", () => {
+    cat_error.style.display = "none";
+  });
+  slovo_inp.addEventListener("input", () => {
+    slovo_error.style.display = "none";
+  });
+
+  if (rec_inp.value == "") {
+    rec_error.style.display = "flex";
+    error++;
+  }
+  if (summa_inp.value == "") {
+    summa_error.style.display = "flex";
+    error++;
+  }
+  if (cat_inp.value == "") {
+    cat_error.style.display = "flex";
+    error++;
+  }
+  if (slovo_inp.value == "") {
+    slovo_error.style.display = "flex";
+    error++;
+  }
+  if (error == 0) {
+    let balance = await web3.eth.getBalance(address_cont.textContent);
+    if (
+      Number(web3.utils.fromWei(balance, "ether")) > Number(summa_inp.value)
+    ) {
+      let perevod = await contractInstance.methods
+        .perevod(
+          rec_inp.value,
+          summa_inp.value,
+          cat_inp.value,
+          slovo_inp.value,
+          type_tranz.value
+        )
+        .send({ from: address_cont.textContent });
+      console.log(type_tranz.value);
+    } else {
+      malo_error.style.display = "flex";
+    }
+  }
+}
